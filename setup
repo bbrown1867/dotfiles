@@ -1,0 +1,25 @@
+#! /bin/sh
+
+# Check for Ubuntu
+if [ -n "$(uname -a | grep -i ubuntu)" ]; then
+	# Check for sudo
+	if [ -n "$(cat /etc/group | grep sudo | grep $USER)" ]; then
+		echo 'Installing packages!'
+		sudo apt update
+		sudo apt install vim git htop tree subversion cscope -y
+	else
+		echo 'Sorry, cannot install packages on this machine.'
+	fi
+elif [ -n "$(uname -a | grep -i Darwin)" ]; then
+	brew install tree htop cscope
+else
+	echo 'Sorry, cannot install packages on this machine.'
+fi
+
+# Blast away old user config
+rm -rf ~/.vimrc ~/.bash_aliases ~/.vim
+
+# Add user config 
+ln -sf $(pwd)/.vimrc ~/.vimrc
+ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim

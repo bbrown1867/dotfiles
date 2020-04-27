@@ -1,0 +1,17 @@
+#! /bin/sh
+
+CSCOPE_DIR="$PWD/cscope"
+
+if [ ! -d "$CSCOPE_DIR" ]; then
+mkdir "$CSCOPE_DIR"
+fi
+
+find "$PWD" -name '*.[ch]' \
+-o -name '*.cc' \
+-o -name '*.hh' \
+-o -name '*.cpp' \
+-o -name '*.hpp' \
+-o -name '*.cxx' \
+-o -name '*.hxx' > "$CSCOPE_DIR/cscope.files"
+
+cscope -b -i "$CSCOPE_DIR/cscope.files"
