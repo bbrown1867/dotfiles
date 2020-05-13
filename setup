@@ -5,8 +5,8 @@ if [ -n "$(uname -a | grep -i ubuntu)" ]; then
 	# Check for sudo
 	if [ -n "$(cat /etc/group | grep sudo | grep $USER)" ]; then
 		echo 'Installing packages!'
-		sudo apt update
-		sudo apt install vim git htop tree subversion cscope -y
+		sudo apt-get update
+		sudo apt-get install vim git htop tree subversion cscope -y
 	else
 		echo 'Sorry, cannot install packages on this machine.'
 	fi
