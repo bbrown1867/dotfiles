@@ -14,5 +14,3 @@ alias gb='git branch -a'
 
 alias tree='tree --dirsfirst'
 alias tt='tree -L 2'
-
-alias st='svn status --ignore-externals | grep .git -v'

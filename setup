@@ -6,12 +6,12 @@ if [ -n "$(uname -a | grep -i ubuntu)" ]; then
 	if [ -n "$(cat /etc/group | grep sudo | grep $USER)" ]; then
 		echo 'Installing packages!'
 		sudo apt-get update
-		sudo apt-get install vim git htop tree subversion cscope -y
+		sudo apt-get install vim git htop tree cscope -y
 	else
 		echo 'Sorry, cannot install packages on this machine.'
 	fi
 elif [ -n "$(uname -a | grep -i Darwin)" ]; then
-	brew install tree htop cscope
+	brew install htop tree cscope
 else
 	echo 'Sorry, cannot install packages on this machine.'
 fi
