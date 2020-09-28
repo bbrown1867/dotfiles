@@ -4,8 +4,8 @@ import os
 import sys
 
 if len(sys.argv) != 3:
-    print('Change the extensions of all file sin current directory. Usage:')
-    print('\textswap <old> <new>')
+    print('Change the extensions of all files in current directory. Usage:')
+    print('\textswap.py <old> <new>')
 else:
     old = sys.argv[1]
     new = sys.argv[2]

@@ -5,7 +5,7 @@ import sys
 
 if len(sys.argv) != 3:
     print('Diffs two directories using file basenames only. Usage:')
-    print('\tbname_diff <dir1> <dir2>')
+    print('\tbname_diff.py <dir1> <dir2>')
 else:
     path1 = sys.argv[1]
     path2 = sys.argv[2]
