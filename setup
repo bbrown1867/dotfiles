@@ -1,17 +1,12 @@
 #! /bin/sh
 
-# Check for Ubuntu
 if [ -n "$(uname -a | grep -i ubuntu)" ]; then
-	# Check for sudo
-	if [ -n "$(cat /etc/group | grep sudo | grep $USER)" ]; then
-		echo 'Installing packages!'
-		sudo apt-get update
-		sudo apt-get install vim git htop tree cscope gnupg -y
-	else
-		echo 'Sorry, cannot install packages on this machine.'
-	fi
-elif [ -n "$(uname -a | grep -i Darwin)" ]; then
+    sudo apt-get update
+    sudo apt-get install vim git htop tree cscope gnupg -y
+elif [ -n "$(uname -a | grep -i darwin)" ]; then
 	brew install htop tree cscope gnupg
+elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
+    sudo pacman -S vim git htop tree cscope gnupg
 else
 	echo 'Sorry, cannot install packages on this machine.'
 fi
