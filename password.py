@@ -33,8 +33,8 @@ def insert_special(st):
 
 def generate_password(secret, phrase, capital=False, special=False):
     m = hashlib.md5()
-    m.update(secret)
-    m.update(phrase)
+    m.update(secret.encode('utf-8'))
+    m.update(phrase.encode('utf-8'))
     st = str(m.hexdigest()[:16])
     if capital:
         st = insert_capital(st)

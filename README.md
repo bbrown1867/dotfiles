@@ -1,8 +1,11 @@
 # bin-ben
 My scripts and dotfiles.
 
-## Ubuntu Terminal Config
+## Ubuntu
+* Terminal config:
 <https://gist.github.com/renshuki/3cf3de6e7f00fa7e744a>
+* Remap caps to escape: 
+`dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"`
 
 ## Arch Linux
 

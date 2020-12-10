@@ -2,19 +2,21 @@
 
 if [ -n "$(uname -a | grep -i ubuntu)" ]; then
     sudo apt-get update
-    sudo apt-get install vim git htop tree cscope gnupg -y
+    sudo apt-get install vim git htop tree cscope gnupg curl -y
 elif [ -n "$(uname -a | grep -i darwin)" ]; then
-	brew install htop tree cscope gnupg
+	brew install htop tree cscope gnupg curl
 elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
-    sudo pacman -S vim git htop tree cscope gnupg
+    sudo pacman -S vim git htop tree cscope gnupg curl
 else
 	echo 'Sorry, cannot install packages on this machine.'
 fi
 
 # Blast away old user config
-rm -rf ~/.vimrc ~/.bash_aliases ~/.vim
+rm -rf ~/.vimrc ~/.aliases ~/.vim
 
 # Add user config 
 ln -sf $(pwd)/.vimrc ~/.vimrc
-ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+ln -sf $(pwd)/.aliases ~/.aliases
+ln -sf $(pwd)/.zshrc.user ~/.zshrc.user
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

@@ -1,0 +1,11 @@
+SAVEHIST=1000
+HISTFILE=$HOME/.zsh_history
+
+PROMPT="%F{cyan}%n%f"
+PROMPT+="@"
+PROMPT+="%F{blue}${${(%):-%m}#zoltan-}%f"
+PROMPT+=" "
+PROMPT+="%F{yellow}%1~%f"
+PROMPT+=" %# "
+
+source $HOME/.aliases

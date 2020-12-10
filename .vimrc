@@ -24,30 +24,27 @@ set relativenumber
 set colorcolumn=81
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-no <up> <Nop>
-no <down> <Nop>
-no <left> <Nop>
-no <right> <Nop>
-
-ino <up> <Nop>
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
-
 let cmd='make'
 map <F1>  :!gentags<CR>:cs add cscope.out<CR>
 map <F3>  :execute '!' . g:cmd <enter>
 map <F4>  :execute '! ls -la' <enter>
 map <F5>  :execute '! tree' <enter>
 
+ino <up> <Nop>
+ino <down> <Nop>
+ino <left> <Nop>
+ino <right> <Nop>
+
+nnoremap <C-p> :GFiles<Cr>
+
 autocmd VimLeave * :execute '! rm -rf cscope.out cscope/'
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'joe-skb7/cscope-maps'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'joe-skb7/cscope-maps'
+Plug 'airblade/vim-gitgutter'
+Plug 'plasticboy/vim-markdown'
 
-call vundle#end()
+call plug#end()
