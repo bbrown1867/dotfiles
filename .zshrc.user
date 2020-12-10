@@ -7,7 +7,7 @@ PROMPT="%F{cyan}%n%f"
 PROMPT+="@"
 PROMPT+="%F{blue}${${(%):-%m}#zoltan-}%f"
 PROMPT+=" "
-PROMPT+="%F{yellow}%1~%f"
+PROMPT+="%F{yellow}%~%f"
 PROMPT+=" %# "
 
 source $HOME/.aliases
