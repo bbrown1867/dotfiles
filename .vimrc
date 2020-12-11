@@ -35,7 +35,7 @@ ino <down> <Nop>
 ino <left> <Nop>
 ino <right> <Nop>
 
-nnoremap <C-p> :GFiles<Cr>
+nnoremap <C-p> :Files<Cr>
 
 autocmd VimLeave * :execute '! rm -rf cscope.out cscope/'
 
@@ -45,6 +45,5 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'joe-skb7/cscope-maps'
 Plug 'airblade/vim-gitgutter'
-Plug 'plasticboy/vim-markdown'
 
 call plug#end()
