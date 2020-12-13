@@ -20,6 +20,8 @@ set showmode
 set showmatch
 set number
 set relativenumber
+
+set encoding=utf-8
 set backspace=indent,eol,start
 
 set foldmethod=syntax
@@ -48,6 +50,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" Complete installation: python3 install.py --clangd-completer --rust-completer
 Plug 'ycm-core/YouCompleteMe'
 
 call plug#end()
@@ -55,5 +59,18 @@ call plug#end()
 " FZF customization
 nnoremap <C-p> :Files<Cr>
 
-" YCM customization
+" YCM customization, key mappings similar to cscope
+nmap <C-\>d :YcmCompleter GetDoc<CR>
+nmap <C-\>g :YcmCompleter GoTo<CR>
+nmap <C-\>s :YcmCompleter GoToSymbol <C-R>=expand("<cword>")<CR><CR>	
+
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_language_server =
+\ [
+\   {
+\     'name': 'rust',
+\     'cmdline': ['rust-analyzer'],
+\     'filetypes': ['rust'],
+\     'project_root_files': ['Cargo.toml']
+\   }
+\ ]
