@@ -2,17 +2,17 @@
 
 if [ -n "$(uname -a | grep -i ubuntu)" ]; then
     sudo apt-get update
-    sudo apt-get install vim git htop tree cscope gnupg curl -y
+    sudo apt-get install vim htop tree cscope gnupg curl -y
 elif [ -n "$(uname -a | grep -i darwin)" ]; then
-	brew install htop tree cscope gnupg curl
+	brew install vim htop tree cscope gnupg curl 
 elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
-    sudo pacman -S vim git htop tree cscope gnupg curl
+    sudo pacman -S vim htop tree cscope gnupg curl  
 else
 	echo 'Sorry, cannot install packages on this machine.'
 fi
 
 # Blast away old user config
-rm -rf ~/.vimrc ~/.aliases ~/.vim
+rm -rf ~/.vimrc ~/.aliases ~/.zshrc.user ~/.vim
 
 # Add user config 
 ln -sf $(pwd)/.vimrc ~/.vimrc
