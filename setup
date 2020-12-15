@@ -8,7 +8,7 @@ elif [ -n "$(uname -a | grep -i darwin)" ]; then
 elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
     sudo pacman -S vim htop tree cscope gnupg curl  
 else
-	echo 'Sorry, cannot install packages on this machine.'
+    echo 'Cannot install packages on this machine.'
 fi
 
 # Blast away old user config
