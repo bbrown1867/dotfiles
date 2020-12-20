@@ -1,6 +1,13 @@
-set nocompatible
-
 syntax on
+
+call plug#begin('~/.vim/plugged')
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'tomasiser/vim-code-dark'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'ycm-core/YouCompleteMe'
+call plug#end()
 
 set autoindent
 if (&ft == 'Makefile')
@@ -12,58 +19,44 @@ else
     set expandtab
 endif
 
+set nocompatible
 set wrapscan
 set hlsearch
-
+set gdefault
 set title
 set showmode
 set showmatch
 set number
 set relativenumber
-
 set encoding=utf-8
 set backspace=indent,eol,start
-
 set foldmethod=syntax
 set foldlevelstart=3
 
 set colorcolumn=81
 highlight ColorColumn ctermbg=0 guibg=lightgrey
+colorscheme codedark
 
 let cmd='make'
-map <F3>  :execute '!' . g:cmd <enter>
-map <F4>  :execute '! ls -la' <enter>
-map <F5>  :execute '! tree' <enter>
+map <F3> :execute '!' . g:cmd <enter>
+map <F4> :execute '! ls -la' <enter>
+map <F5> :execute '! tree -L 2' <enter>
 
-ino <up> <Nop>
-ino <down> <Nop>
-ino <left> <Nop>
-ino <right> <Nop>
+let mapleader = ";"
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+nnoremap <leader>n :bn<Cr>
+nnoremap <leader>p :bp<Cr>
+nnoremap <leader>f :Files<Cr>
+nnoremap <leader>d :YcmCompleter GetDoc<CR>
+nnoremap <leader>g :YcmCompleter GoTo<CR>
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Plugin - Airline
+let g:airline#extensions#tabline#enabled = 1
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Complete installation: python3 install.py --clangd-completer --rust-completer
-Plug 'ycm-core/YouCompleteMe'
-
-call plug#end()
-
-" FZF customization
-nnoremap <C-p> :Files<Cr>
-
-" YCM customization, key mappings similar to cscope
-nmap <C-\>d :YcmCompleter GetDoc<CR>
-nmap <C-\>g :YcmCompleter GoTo<CR>
-nmap <C-\>s :YcmCompleter GoToSymbol <C-R>=expand("<cword>")<CR><CR>	
-
+" Plugin - YCM: `python3 install.py --clangd-completer --rust-completer`
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_language_server =
 \ [
