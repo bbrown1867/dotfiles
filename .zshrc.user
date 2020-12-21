@@ -1,4 +1,4 @@
-#! /usr/bin/zsh
+#! /bin/zsh
 
 SAVEHIST=1000
 HISTFILE=$HOME/.zsh_history
