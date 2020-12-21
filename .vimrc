@@ -4,9 +4,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'tomasiser/vim-code-dark'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'ycm-core/YouCompleteMe'
 call plug#end()
 
 set autoindent
@@ -49,21 +46,6 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>n :bn<Cr>
 nnoremap <leader>p :bp<Cr>
-nnoremap <leader>f :Files<Cr>
-nnoremap <leader>d :YcmCompleter GetDoc<CR>
-nnoremap <leader>g :YcmCompleter GoTo<CR>
 
 " Plugin - Airline
 let g:airline#extensions#tabline#enabled = 1
-
-" Plugin - YCM: `python3 install.py --clangd-completer --rust-completer`
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_language_server =
-\ [
-\   {
-\     'name': 'rust',
-\     'cmdline': ['rust-analyzer'],
-\     'filetypes': ['rust'],
-\     'project_root_files': ['Cargo.toml']
-\   }
-\ ]
