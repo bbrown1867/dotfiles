@@ -16,3 +16,6 @@ alias gb='git branch -a'
 
 alias tree='tree --dirsfirst'
 alias tt='tree -L 2'
+
+alias g='grep -rn . -e'
+alias gw='grep -rnw . -e'

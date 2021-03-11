@@ -3,7 +3,11 @@ syntax on
 call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasiser/vim-code-dark'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set autoindent
@@ -32,7 +36,15 @@ set foldlevelstart=3
 
 set colorcolumn=81
 highlight ColorColumn ctermbg=0 guibg=lightgrey
-colorscheme codedark
+if has('macunix') && system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+    set background=dark
+    colorscheme codedark
+    let g:airline_theme='dark'
+else
+    set background=light
+    colorscheme papercolor
+    let g:airline_theme='papercolor'
+endif
 
 let cmd='make'
 map <F3> :execute '!' . g:cmd <enter>
@@ -46,6 +58,6 @@ nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 nnoremap <leader>f :bn<Cr>
 nnoremap <leader>a :bp<Cr>
+nnoremap <leader>p :GFiles<Cr>
 
-" Plugin - Airline
 let g:airline#extensions#tabline#enabled = 1
