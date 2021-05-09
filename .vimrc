@@ -42,7 +42,7 @@ if has('macunix') && system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
     let g:airline_theme='dark'
 else
     set background=light
-    colorscheme papercolor
+    colorscheme PaperColor
     let g:airline_theme='papercolor'
 endif
 
