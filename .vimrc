@@ -20,6 +20,7 @@ else
     set expandtab
 endif
 
+set t_Co=256
 set nocompatible
 set wrapscan
 set hlsearch
