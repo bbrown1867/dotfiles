@@ -62,3 +62,8 @@ nnoremap <leader>a :bp<Cr>
 nnoremap <leader>p :GFiles<Cr>
 
 let g:airline#extensions#tabline#enabled = 1
+
+function! DisplayWhitespace()
+    set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:␣
+    set list
+endfunction
