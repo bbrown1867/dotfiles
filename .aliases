@@ -13,6 +13,8 @@ fi
 alias gs='git status'
 alias gd='git diff -b'
 alias gb='git branch -a'
+alias gf="git fetch -p"
+alias branches="git branch -a | grep bbrown"
 
 alias tree='tree --dirsfirst'
 alias tt='tree -L 2'
