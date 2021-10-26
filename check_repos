@@ -1,0 +1,57 @@
+#! /usr/bin/python3
+
+"""
+Looks for Git repositories one-level down from current directory and prints
+some useful status information for each repository.
+"""
+
+import os
+import subprocess
+from contextlib import contextmanager
+
+
+def _pretty_print(title, text, expr=None):
+    print(title)
+    for line in text.split('\n'):
+        if not expr or expr in line:
+            print('\t' + str(line))
+
+
+def _run_git_cmd(cmd):
+    return subprocess.check_output(['git'] + cmd).decode()
+
+
+def _get_git_branch():
+    return _run_git_cmd(['rev-parse', '--abbrev-ref', 'HEAD'])
+
+
+def _get_git_status():
+    return _run_git_cmd(['status', '-s'])
+
+
+def _get_all_git_branches():
+    return _run_git_cmd(['branch', '-a'])
+
+
+@contextmanager
+def folder(path):
+    os.chdir(path)
+    yield
+    os.chdir('..')
+
+
+def check_repos():
+    for item in sorted(os.listdir('.')):
+        git_dir = os.path.join(item, '.git')
+        if os.path.isdir(item) and os.path.exists(git_dir):
+            with folder(item):
+                print('\n######## %s ########' % item)
+                _pretty_print('Branch:', _get_git_branch())
+                _pretty_print('Status:', _get_git_status())
+                _pretty_print('My Branches:',
+                              _get_all_git_branches(),
+                              expr='bbrown')
+
+
+if __name__ == '__main__':
+    check_repos()
