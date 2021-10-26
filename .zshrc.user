@@ -1,14 +1,15 @@
 #! /bin/zsh
 
+# History config
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
-
 setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_DUPS
 
+# Color prompt
 PROMPT="%F{cyan}%n%f"
 PROMPT+="@"
 PROMPT+="%F{blue}${${(%):-%m}#zoltan-}%f"
@@ -16,4 +17,16 @@ PROMPT+=" "
 PROMPT+="%F{172}%~%f"
 PROMPT+=" %# "
 
+# Color ls output
+export CLICOLOR=1
+export LSCOLORS=gxfxcxdxbxegedabagacad
+
+# Custom aliases
 source $HOME/.aliases
+
+# Setup fzf (must run "PlugInstall" in vim prior)
+export PATH="$HOME/.vim/plugged/fzf/bin:$PATH"
+source $HOME/.vim/plugged/fzf/shell/key-bindings.zsh
+
+# Default editor
+export EDITOR=vim
