@@ -32,7 +32,6 @@ set number
 set relativenumber
 set encoding=utf-8
 set backspace=indent,eol,start
-set mouse=a
 
 set colorcolumn=81
 highlight ColorColumn ctermbg=0 guibg=lightgrey
