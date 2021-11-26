@@ -75,8 +75,13 @@ def _analyze_repo(label, verbose):
     ]
     ignores = list(set(ignores) - set(untracked))
 
-    def _status_checker(message, output_lines, cond=True):
-        if cond and output_lines:
+    # Remove the default branches from the locals
+    branches = [
+        branch for branch in branches if branch not in DEFAULT_BRANCH_NAMES
+    ]
+
+    def _status_checker(message, output_lines):
+        if output_lines:
             _pprint(message)
             if verbose:
                 _pprint(output_lines)
@@ -88,9 +93,7 @@ def _analyze_repo(label, verbose):
             _pprint("On feature branch %s." % _get_git_branch())
 
     _status_checker(
-        "%d local branches in repository." % len(branches),
-        branches,
-        len(branches) > 1,
+        "%d feature branches in repository." % len(branches), branches
     )
 
     _status_checker(
