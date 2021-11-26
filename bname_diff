@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/env python3
 
 import os
 import sys
@@ -13,13 +13,13 @@ def bname_diff(path1, path2):
                 if f1 == f2:
                     break
             else:
-                print('Only in %s: %s' % (p1, f1))
+                print("Only in %s: %s" % (p1, f1))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print('Diffs two directories using file basenames only. Usage:')
-        print('\tbname_diff.py <dir1> <dir2>')
+        print("Diffs two directories using file basenames only. Usage:")
+        print("\tbname_diff.py <dir1> <dir2>")
     else:
         path1 = sys.argv[1]
         path2 = sys.argv[2]
