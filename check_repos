@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
-"""
-Prints useful status information about Git repositories.
+"""Print status information about Git repositories.
+
 If the current directory is a Git repository, the status
 of it is printed. If not, all directories one-level down
 are checked and status information is printed for each.
@@ -45,7 +45,7 @@ def _get_git_stashes():
     return _run_git_cmd(["stash", "list"])
 
 
-def _get_git_branch_info(label, verbose):
+def _get_git_branch_info(label):
     curr_branch = None
     local_branches = []
     labeled_branches = []
@@ -80,9 +80,7 @@ def _analyze_repo(label, verbose):
     ignores = _get_git_ignores()
     stashes = _get_git_stashes()
 
-    curr_branch, local_branches, labeled_branches = _get_git_branch_info(
-        label, verbose
-    )
+    curr_branch, local_branches, labeled_branches = _get_git_branch_info(label)
 
     def _status_checker(message, output_lines):
         if output_lines:
@@ -130,6 +128,7 @@ def _is_git_repo(path):
 
 
 def check_repos(label=DEFAULT_LABEL, target_repo=None, verbose=False):
+    """Print status information about Git repositories."""
     cwd = os.getcwd()
     if _is_git_repo(cwd):
         repo = os.path.split(cwd)[-1]
