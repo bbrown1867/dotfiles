@@ -33,52 +33,56 @@ def _run_git_cmd(cmd, remove_text=None):
     return [line.strip() for line in output.split("\n") if line]
 
 
-def _get_git_branch():
-    lines = _run_git_cmd(["rev-parse", "--abbrev-ref", "HEAD"])
-    assert len(lines) == 1
-    return lines[0]
-
-
-def _get_git_branches():
-    local_branches = _run_git_cmd(["branch"], remove_text="* ")
-    return [branch for branch in local_branches if "detached" not in branch]
-
-
-def _get_git_branches_with_label(label):
-    all_branches = _run_git_cmd(["branch", "-a"], remove_text="* ")
-    return [branch for branch in all_branches if label in branch]
-
-
 def _get_git_status():
     return _run_git_cmd(["status", "-s"])
 
 
 def _get_git_ignores():
-    return _run_git_cmd(["clean", "-xdn"], remove_text="Would remove ")
+    return _run_git_cmd(["clean", "-Xdn"], remove_text="Would remove ")
 
 
 def _get_git_stashes():
     return _run_git_cmd(["stash", "list"])
 
 
+def _analyze_git_branches(label, verbose):
+    curr_branch = None
+    local_branches = []
+    labeled_branches = []
+    for branch in _run_git_cmd(["branch", "-a"]):
+        strip_curr_branch_marker = branch.split("* ")
+        if len(strip_curr_branch_marker) == 2:
+            branch = strip_curr_branch_marker[1]
+            curr_branch = branch
+        else:
+            branch = strip_curr_branch_marker[0]
+
+        if not branch.startswith("remotes") and branch != curr_branch:
+            local_branches.append(branch)
+
+        if label in branch:
+            labeled_branches.append(branch)
+
+    assert curr_branch, "Error: Could not find current branch."
+
+    # Remove duplication between local/remote labeled branches
+    labeled_branches_filtered = labeled_branches + []
+    for branch1 in labeled_branches:
+        for branch2 in labeled_branches:
+            if "remotes/origin/" + branch1 == branch2:
+                labeled_branches_filtered.remove(branch2)
+
+    return curr_branch, local_branches, labeled_branches_filtered
+
+
 def _analyze_repo(label, verbose):
-    branch = _get_git_branch()
-    branches = _get_git_branches()
-    label_branches = _get_git_branches_with_label(label)
     changes = _get_git_status()
     ignores = _get_git_ignores()
     stashes = _get_git_stashes()
 
-    # Avoid duplication between ignores and changes
-    untracked = [
-        change.split()[1] for change in changes if change.split()[0] == "??"
-    ]
-    ignores = list(set(ignores) - set(untracked))
-
-    # Remove the default branches from the locals
-    branches = [
-        branch for branch in branches if branch not in DEFAULT_BRANCH_NAMES
-    ]
+    curr_branch, local_branches, labeled_branches = _analyze_git_branches(
+        label, verbose
+    )
 
     def _status_checker(message, output_lines):
         if output_lines:
@@ -86,23 +90,24 @@ def _analyze_repo(label, verbose):
             if verbose:
                 _pprint(output_lines)
 
-    if branch not in DEFAULT_BRANCH_NAMES:
-        if branch == "HEAD":
+    if curr_branch not in DEFAULT_BRANCH_NAMES:
+        if "HEAD detached at" in curr_branch:
             _pprint("In detached state.")
         else:
-            _pprint("On feature branch %s." % _get_git_branch())
+            _pprint("On non-default branch %s." % curr_branch)
 
     _status_checker(
-        "%d feature branches in repository." % len(branches), branches
+        "%d other local branches in repository." % len(local_branches),
+        local_branches,
     )
 
     _status_checker(
-        "%d branches contain label %s." % (len(label_branches), label),
-        label_branches,
+        "%d branches contain label %s." % (len(labeled_branches), label),
+        labeled_branches,
     )
 
     _status_checker("Repository has working changes.", changes)
-    _status_checker("Repository has build artifacts.", ignores)
+    _status_checker("Repository has ignored files.", ignores)
     _status_checker("Repository has stashed changes.", stashes)
 
 
