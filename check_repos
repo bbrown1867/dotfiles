@@ -45,7 +45,7 @@ def _get_git_stashes():
     return _run_git_cmd(["stash", "list"])
 
 
-def _analyze_git_branches(label, verbose):
+def _get_git_branch_info(label, verbose):
     curr_branch = None
     local_branches = []
     labeled_branches = []
@@ -80,7 +80,7 @@ def _analyze_repo(label, verbose):
     ignores = _get_git_ignores()
     stashes = _get_git_stashes()
 
-    curr_branch, local_branches, labeled_branches = _analyze_git_branches(
+    curr_branch, local_branches, labeled_branches = _get_git_branch_info(
         label, verbose
     )
 
