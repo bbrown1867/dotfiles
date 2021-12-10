@@ -21,3 +21,5 @@ alias tt='tree -L 2'
 
 alias g='grep -rn . -e'
 alias gw='grep -rnw . -e'
+
+alias cr='check_repos'
