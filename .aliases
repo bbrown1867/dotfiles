@@ -14,6 +14,7 @@ alias gs='git status'
 alias gd='git diff -b'
 alias gb='git branch -a'
 alias gf="git fetch -p"
+alias gds="git diff -b --staged"
 alias branches="git branch -a | grep bbrown"
 
 alias tree='tree --dirsfirst'
