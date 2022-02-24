@@ -2,15 +2,19 @@
 
 PACKAGES="vim tmux htop tree cscope gnupg curl"
 
-if [ -n "$(uname -a | grep -i ubuntu)" ]; then
-    sudo apt-get update
-    sudo apt-get install $PACKAGES -y
-elif [ -n "$(uname -a | grep -i darwin)" ]; then
-    brew install $PACKAGES
-elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
-    sudo pacman -S $PACKAGES
+if [[ $* == *--skip* ]]; then
+    echo "Skipping package install."
 else
-    echo 'Cannot install packages on this machine.'
+    if [ -n "$(uname -a | grep -i ubuntu)" ]; then
+        sudo apt-get update
+        sudo apt-get install $PACKAGES -y
+    elif [ -n "$(uname -a | grep -i darwin)" ]; then
+        brew install $PACKAGES
+    elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
+        sudo pacman -S $PACKAGES
+    else
+        echo "Cannot install packages on this machine."
+    fi
 fi
 
 # Blast away old user config
