@@ -18,11 +18,11 @@ else
 fi
 
 # Blast away old user config
-rm -rf ~/.vimrc ~/.aliases ~/.zshrc.user ~/.tmux.conf ~/.vim
+rm -rf ~/.vimrc ~/.bash_aliases ~/.zshrc.user ~/.tmux.conf ~/.vim
 
 # Add user config
 ln -sf $(pwd)/.vimrc ~/.vimrc
-ln -sf $(pwd)/.aliases ~/.aliases
+ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
 ln -sf $(pwd)/.zshrc.user ~/.zshrc.user
 ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
