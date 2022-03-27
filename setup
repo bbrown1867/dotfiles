@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PACKAGES="vim tmux htop tree cscope gnupg curl"
+PACKAGES="vim tmux htop tree cscope gnupg curl ripgrep"
 
 if [[ $* == *--skip* ]]; then
     echo "Skipping package install."
@@ -17,13 +17,14 @@ else
     fi
 fi
 
-# Blast away old user config
-rm -rf ~/.vimrc ~/.bash_aliases ~/.zshrc.user ~/.tmux.conf ~/.vim
+# Delete old user config
+rm -rf ~/.vimrc ~/.bash_aliases ~/.zshrc.user ~/.zshenv ~/.tmux.conf ~/.vim
 
 # Add user config
 ln -sf $(pwd)/.vimrc ~/.vimrc
 ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
 ln -sf $(pwd)/.zshrc.user ~/.zshrc.user
+ln -sf $(pwd)/.zshrc.user ~/.zshenv
 ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
