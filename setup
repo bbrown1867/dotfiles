@@ -28,15 +28,4 @@ ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
 
-# Add VSCode config (macOS only)
-if [ -n "$(uname -a | grep -i darwin)" ]; then
-    VSCODE_DIR=~/Library/Application\ Support/Code/User
-    if [ -d "$VSCODE_DIR" ]; then
-        cp "$VSCODE_DIR/settings.json" "$VSCODE_DIR/settings.json.orig"
-        ln -sf "$(pwd)/vscode.json" "$VSCODE_DIR/settings.json"
-    else
-        echo "VSCode not installed on this machine."
-    fi
-fi
-
 echo "Setup complete."
