@@ -1,9 +1,9 @@
 # bin-ben
 My scripts and dotfiles.
 
-## `tmux`
+## tmux
 
-Session management from outside `tmux`.
+Session management outside `tmux`.
 
     tmux             # new unnamed session
     tmux new -s name # new named session
@@ -11,7 +11,7 @@ Session management from outside `tmux`.
     tmux a -t myname # attach to named session
     tmux ls          # list sessions
 
-Once `tmux` is open, the following shortcuts are used with prefix `<C-b>`.
+Once inside `tmux`, the following shortcuts are used with prefix `<C-b>`.
 
     d           # detach (close tmux)
     :bind-key ? # list all shortcuts
@@ -19,7 +19,7 @@ Once `tmux` is open, the following shortcuts are used with prefix `<C-b>`.
     s           # list sessions
     $           # name session
 
-Windows:
+_Windows:_
 
     c           # create window
     w           # list windows
@@ -28,25 +28,19 @@ Windows:
     ,           # name window
     &           # kill window
 
-Panes:
+_Panes:_
 
     %           # vertical split
     "           # horizontal split
     x           # kill pane
 
-Copy mode:
+_Copy mode:_
 
     [           # enter copy mode (.tmux.conf: vim bindings)
     <Cr>        # exit copy mode
     <Space>     # begin select
     <Cr>        # end select (.tmux.conf: copy to clipboard)
     ]           # paste
-
-## Ubuntu
-* Terminal config:
-<https://gist.github.com/renshuki/3cf3de6e7f00fa7e744a>
-* Remap caps to escape: 
-`dconf write /org/gnome/desktop/input-sources/xkb-options "['caps:escape']"`
 
 ## Arch Linux
 
@@ -126,7 +120,7 @@ Copy mode:
     * Enable on startup: `systemctl enable sddm.service`
     * For full set of default KDE applications: `pacman -S kde-applications`
 
-### Other Tips
+### Other
 * Check installed packages: `pacman -Q`
 * Check installed services: `systemctl list-unit-files`
 * Leave KDE (back to console): `CTRL + ALT + F2`
