@@ -168,4 +168,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    check_repos(args.label, args.repository, args.verbose)
+    try:
+        check_repos(args.label, args.repository, args.verbose)
+    except KeyboardInterrupt:
+        exit(0)
