@@ -10,7 +10,16 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'dense-analysis/ale'
 call plug#end()
+
+let g:ale_completion_enabled = 1
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+    \ 'python': ['jedils', 'pylint', 'pycodestyle'],
+    \ 'rust': ['analyzer']
+    \ }
 
 " Spacing
 
@@ -77,15 +86,32 @@ function! SetupTags()
     endif
 endfunction
 
+function! SetupEmbeddedRust()
+    " rust-analyzer needs a special LSP config for embedded targets
+    " Update the --target argument to match the architecture in .cargo/config
+    let g:ale_rust_analyzer_config = {
+        \ 'checkOnSave': {
+            \ 'allTargets': v:false,
+            \ 'extraArgs': ['--target', 'thumbv7m-none-eabi']
+        \ }
+    \ }
+endfunction
+
 " Key mappings
 
 let mapleader = ";"
 
-nnoremap <leader>x :bn<Cr>
 nnoremap <leader>z :bp<Cr>
+nnoremap <leader>x :bn<Cr>
+
 nnoremap <leader>p :GFiles<Cr>
 nnoremap <leader>f :Rg<Cr>
+
+nnoremap <leader>g :ALEGoToDefinition<Cr>
+nnoremap <leader>e :ALENextWrap<Cr>
+
+nnoremap <leader>d :vertical Gdiff<Cr>
+
 nnoremap <leader>r :make<Cr>
 nnoremap <leader>t :vertical term<Cr>
-nnoremap <leader>d :vertical Gdiff<Cr>
 nnoremap <leader>w <C-w><C-w>
