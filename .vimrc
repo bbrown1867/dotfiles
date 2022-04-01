@@ -57,7 +57,7 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 let g:airline#extensions#tabline#enabled = 1
 
-if has('macunix') && system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+if !has('macunix') || system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
     set background=dark
     colorscheme codedark
     let g:airline_theme='dark'
