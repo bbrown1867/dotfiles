@@ -92,7 +92,7 @@ function! SetupEmbeddedRust()
     let g:ale_rust_analyzer_config = {
         \ 'checkOnSave': {
             \ 'allTargets': v:false,
-            \ 'extraArgs': ['--target', 'thumbv7m-none-eabi']
+            \ 'extraArgs': ['--target', 'thumbv7em-none-eabihf']
         \ }
     \ }
 endfunction

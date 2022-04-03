@@ -11,14 +11,16 @@ else
 fi
 
 alias gs='git status'
-alias gd='git diff -b'
 alias gb='git branch -a'
 alias gf="git fetch -p"
+alias gl="git log"
+alias gd='git diff -b'
 alias gds="git diff -b --staged"
 alias branches="git branch -a | grep bbrown"
 
 alias tree='tree --dirsfirst'
 alias tt='tree -L 2'
+alias tth="tree -L 2 -I Library ~"
 
 alias g='grep -rn . -e'
 alias gw='grep -rnw . -e'
