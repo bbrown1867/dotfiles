@@ -17,6 +17,8 @@ else
     fi
 fi
 
+DOTFILES=".vimrc .bash_aliases .zshrc.user .zshenv .tmux.conf .p10k.zsh"
+
 # Add dotfiles
 rm -f $DOTFILES
 for filename in $DOTFILES; do
