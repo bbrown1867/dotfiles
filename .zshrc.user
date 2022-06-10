@@ -28,5 +28,9 @@ source $HOME/.bash_aliases
 export PATH="$HOME/.vim/plugged/fzf/bin:$PATH"
 source $HOME/.vim/plugged/fzf/shell/key-bindings.zsh
 
+# Setup powerlevel10k
+source $HOME/.powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.p10k.zsh
+
 # Default editor
 export EDITOR=vim
