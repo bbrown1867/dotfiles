@@ -17,16 +17,19 @@ else
     fi
 fi
 
-# Delete old user config
-rm -rf ~/.vimrc ~/.bash_aliases ~/.zshrc.user ~/.zshenv ~/.tmux.conf ~/.vim
+# Add dotfiles
+rm -f $DOTFILES
+for filename in $DOTFILES; do
+    ln -sf $(pwd)/$filename $HOME/$filename
+done
 
-# Add user config
-ln -sf $(pwd)/.vimrc ~/.vimrc
-ln -sf $(pwd)/.bash_aliases ~/.bash_aliases
-ln -sf $(pwd)/.zshrc.user ~/.zshrc.user
-ln -sf $(pwd)/.zshrc.user ~/.zshenv
-ln -sf $(pwd)/.tmux.conf ~/.tmux.conf
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+# Install vim-plug
+rm -rf $HOME/.vim
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
+
+# Install powerlevel10k
+rm -rf $HOME/.powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $HOME/.powerlevel10k
 
 echo "Setup complete."
