@@ -17,13 +17,16 @@ else
     fi
 fi
 
-DOTFILES=".vimrc .bash_aliases .zshrc.user .zshenv .tmux.conf .p10k.zsh"
+DOTFILES=".vimrc .bash_aliases .zshrc.user .tmux.conf .p10k.zsh"
 
 # Add dotfiles
-rm -f $DOTFILES
 for filename in $DOTFILES; do
+    rm -f $HOME/filename
     ln -sf $(pwd)/$filename $HOME/$filename
 done
+
+# Duplicate symlink for zshenv
+ln -sf $(pwd)/.zshrc.user $HOME/.zshenv
 
 # Install vim-plug
 rm -rf $HOME/.vim
