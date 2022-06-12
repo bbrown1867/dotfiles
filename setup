@@ -2,6 +2,7 @@
 
 PACKAGES="vim tmux htop tree cscope gnupg curl ripgrep"
 
+# Install packages
 if [[ $* == *--skip* ]]; then
     echo "Skipping package install."
 else
@@ -21,11 +22,11 @@ DOTFILES=".vimrc .bash_aliases .zshrc.user .tmux.conf .p10k.zsh"
 
 # Add dotfiles
 for filename in $DOTFILES; do
-    rm -f $HOME/filename
+    rm -f $HOME/$filename
     ln -sf $(pwd)/$filename $HOME/$filename
 done
 
-# Duplicate symlink for zshenv
+# Add duplicate symlink for zshenv
 ln -sf $(pwd)/.zshrc.user $HOME/.zshenv
 
 # Install vim-plug
