@@ -1,14 +1,11 @@
 #! /bin/bash
 
-DOTFILES=".vimrc .bash_aliases .zshrc.user .tmux.conf .p10k.zsh"
+DOTFILES=".bash_aliases .p10k.zsh .tmux.conf .vimrc .zshenv"
 
 # Remove dotfiles
 for filename in $DOTFILES; do
     rm -f $HOME/$filename
 done
-
-# Remove duplicate symlink for zshenv
-rm -f $HOME/.zshenv
 
 # Remove vim-plug
 rm -rf $HOME/.vim
