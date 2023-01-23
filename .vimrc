@@ -103,15 +103,9 @@ let mapleader = ";"
 
 nnoremap <leader>z :bp<Cr>
 nnoremap <leader>x :bn<Cr>
-
 nnoremap <leader>p :GFiles<Cr>
 nnoremap <leader>f :Rg<Cr>
-
 nnoremap <leader>g :ALEGoToDefinition<Cr>
 nnoremap <leader>e :ALENextWrap<Cr>
-
 nnoremap <leader>d :vertical Gdiff<Cr>
-
-nnoremap <leader>r :make<Cr>
-nnoremap <leader>t :vertical term<Cr>
 nnoremap <leader>w <C-w><C-w>

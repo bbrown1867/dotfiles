@@ -1,6 +1,6 @@
 #! /bin/bash
 
-DOTFILES=".bash_aliases .p10k.zsh .tmux.conf .vimrc .zshenv"
+DOTFILES=".bash_aliases .tmux.conf .vimrc .zshrc"
 
 # Remove dotfiles
 for filename in $DOTFILES; do
@@ -9,8 +9,5 @@ done
 
 # Remove vim-plug
 rm -rf $HOME/.vim
-
-# Remove powerlevel10k
-rm -rf $HOME/.powerlevel10k
 
 echo "Teardown complete."
