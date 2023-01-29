@@ -15,8 +15,9 @@ call plug#end()
 
 let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
+let g:ale_python_pycodestyle_options = '--max-line-length 150'
 let g:ale_linters = {
-    \ 'python': ['jedils', 'pylint', 'pycodestyle'],
+    \ 'python': ['jedils', 'pycodestyle'],
     \ 'rust': ['analyzer']
     \ }
 
