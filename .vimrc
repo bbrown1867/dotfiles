@@ -72,18 +72,6 @@ function! DisplayWhitespace()
     set list
 endfunction
 
-function! SetupTags()
-    if has("cscope")
-        ! gentags
-        set cscopetag
-        set csto=0
-        set nocscopeverbose
-        cs add cscope.out
-    else
-        echo "Vim not compiled with cscope"
-    endif
-endfunction
-
 function! SetupEmbeddedRust()
     " rust-analyzer needs a special LSP config for embedded targets
     " Update the --target argument to match the architecture in .cargo/config
@@ -104,6 +92,27 @@ nnoremap <leader>x :bn<Cr>
 nnoremap <leader>p :GFiles<Cr>
 nnoremap <leader>f :Rg<Cr>
 nnoremap <leader>g :ALEGoToDefinition<Cr>
+nnoremap <leader>c :ALEFindReferences<Cr>
 nnoremap <leader>e :ALENextWrap<Cr>
 nnoremap <leader>d :vertical Gdiff<Cr>
 nnoremap <leader>w <C-w><C-w>
+
+" Config and key mappings for cscope
+
+if has("cscope")
+    set cscopetag
+    set csto=0
+    set nocscopeverbose
+
+    if filereadable("cscope.out")
+        cs add cscope.out
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+
+    " Go to definition under cursor (overidde ALEGoToDefinition)
+    autocmd FileType c nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+
+    " Find functions calling function under cursor (override ALEFindReferences)
+    autocmd FileType c nnoremap <buffer> <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+endif
