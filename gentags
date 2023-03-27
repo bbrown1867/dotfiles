@@ -1,5 +1,7 @@
 #! /bin/bash
 
+EXCLUDE="$PWD/build"
+
 rm -f cscope.out
 
 find "$PWD" -name '*.[ch]' \
@@ -8,7 +10,7 @@ find "$PWD" -name '*.[ch]' \
 -o -name '*.cpp' \
 -o -name '*.hpp' \
 -o -name '*.cxx' \
--o -name '*.hxx' > cscope.files
+-o -name '*.hxx' | grep -v $EXCLUDE > cscope.files
 
 cscope -b -i cscope.files
 

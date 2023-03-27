@@ -112,7 +112,9 @@ if has("cscope")
 
     " Go to definition under cursor (overidde ALEGoToDefinition)
     autocmd FileType c nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    autocmd FileType cpp nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 
     " Find functions calling function under cursor (override ALEFindReferences)
     autocmd FileType c nnoremap <buffer> <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    autocmd FileType cpp nnoremap <buffer> <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 endif
