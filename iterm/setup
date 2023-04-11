@@ -1,6 +1,0 @@
-#! /bin/bash
-
-DEST="$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch"
-
-mkdir -p "$DEST"
-ln -sf "$(pwd)/auto_dark_mode.py" "$DEST"
