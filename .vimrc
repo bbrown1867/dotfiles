@@ -85,7 +85,7 @@ endfunction
 
 " Key mappings
 
-let mapleader = ";"
+let mapleader = " "
 
 nnoremap <leader>z :bp<Cr>
 nnoremap <leader>x :bn<Cr>
