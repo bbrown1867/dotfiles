@@ -61,7 +61,7 @@ colorscheme PaperColor
 let g:airline_theme='papercolor'
 let g:airline#extensions#tabline#enabled = 1
 
-if !has('macunix') || system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+if !has('macunix') || system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
     set background=dark
 else
     set background=light
@@ -87,7 +87,7 @@ endfunction
 
 " Key mappings
 
-let mapleader = " "
+let mapleader = ' '
 
 nnoremap <leader>z :bp<Cr>
 nnoremap <leader>x :bn<Cr>
@@ -101,14 +101,14 @@ nnoremap <leader>w <C-w><C-w>
 
 " Config and key mappings for cscope
 
-if has("cscope")
+if has('cscope')
     set cscopetag
     set csto=0
     set nocscopeverbose
 
-    if filereadable("cscope.out")
+    if filereadable('cscope.out')
         cs add cscope.out
-    elseif $CSCOPE_DB != ""
+    elseif $CSCOPE_DB != ''
         cs add $CSCOPE_DB
     endif
 
