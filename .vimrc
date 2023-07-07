@@ -8,7 +8,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'dense-analysis/ale'
 call plug#end()
@@ -96,7 +95,6 @@ nnoremap <leader>f :Rg<Cr>
 nnoremap <leader>g :ALEGoToDefinition<Cr>
 nnoremap <leader>c :ALEFindReferences<Cr>
 nnoremap <leader>e :ALENextWrap<Cr>
-nnoremap <leader>d :vertical Gdiff<Cr>
 nnoremap <leader>w <C-w><C-w>
 
 " Config and key mappings for cscope
