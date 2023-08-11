@@ -1,0 +1,18 @@
+#! /bin/bash
+
+set -e
+
+# Run this script from the "app" directory of ZMK
+# Update `CONFIG_LOCATION` to point to this directory
+CONFIG_LOCATION="$HOME/Development/bin-ben/lily58"
+
+rm -rf build/
+
+west build -d build/settings -b nice_nano_v2 -- -DSHIELD=settings_reset
+west build -d build/left     -b nice_nano_v2 -- -DSHIELD=lily58_left  -DZMK_CONFIG=$CONFIG_LOCATION
+west build -d build/right    -b nice_nano_v2 -- -DSHIELD=lily58_right -DZMK_CONFIG=$CONFIG_LOCATION
+
+cp build/settings/zephyr/zmk.uf2 ~/Downloads/settings.uf2
+cp build/left/zephyr/zmk.uf2     ~/Downloads/left.uf2
+cp build/right/zephyr/zmk.uf2    ~/Downloads/right.uf2
+
