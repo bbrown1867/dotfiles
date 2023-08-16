@@ -1,4 +1,4 @@
-# bin-ben
+# dotfiles
 My scripts and dotfiles.
 
 ## tmux

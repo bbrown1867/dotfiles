@@ -4,7 +4,7 @@ set -e
 
 # Run this script from the "app" directory of ZMK
 # Update `CONFIG_LOCATION` to point to this directory
-CONFIG_LOCATION="$HOME/Development/bin-ben/lily58"
+CONFIG_LOCATION="$HOME/Development/dotfiles/lily58"
 
 rm -rf build/
 
