@@ -53,7 +53,7 @@ set splitbelow
 
 " Display
 
-set colorcolumn=81
+set colorcolumn=81,121
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 colorscheme PaperColor
