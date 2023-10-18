@@ -10,4 +10,4 @@ done
 # Remove vim-plug
 rm -rf $HOME/.vim
 
-echo "Teardown complete."
+echo "Teardown complete"
