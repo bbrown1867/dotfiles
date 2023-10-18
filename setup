@@ -4,7 +4,7 @@ PACKAGES="cscope curl gnupg htop ripgrep tmux tree vim"
 
 # Install packages
 if [[ $* == *--skip* ]]; then
-    echo "Skipping package install."
+    echo "Skipping package install"
 else
     if [ -n "$(uname -a | grep -i ubuntu)" ]; then
         sudo apt-get update
@@ -14,7 +14,7 @@ else
     elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
         sudo pacman -S $PACKAGES
     else
-        echo "Cannot install packages on this machine."
+        echo "Cannot install packages on this machine"
     fi
 fi
 
@@ -31,4 +31,4 @@ rm -rf $HOME/.vim
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
 
-echo "Setup complete."
+echo "Setup complete"
