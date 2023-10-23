@@ -58,10 +58,11 @@ set encoding=utf-8
 set backspace=indent,eol,start
 set splitright
 set splitbelow
+set mouse=nv
 
 " Display
 
-set colorcolumn=81,121
+set colorcolumn=81,101,121
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 colorscheme PaperColor
