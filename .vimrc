@@ -16,11 +16,19 @@ let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-let g:ale_python_pycodestyle_options = '--max-line-length 150'
 let g:ale_linters = {
     \ 'python': ['jedils', 'flake8', 'pycodestyle'],
     \ 'rust': ['analyzer']
     \ }
+let g:ale_python_pycodestyle_options = '--max-line-length 150'
+let g:ale_rust_analyzer_config = {
+    \ 'cargo': {
+        \ 'target': 'thumbv7em-none-eabihf'
+    \ },
+    \ 'check': {
+        \ 'allTargets': v:false
+    \ }
+\ }
 
 " Spacing
 
@@ -71,17 +79,6 @@ endif
 function! DisplayWhitespace()
     set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:␣
     set list
-endfunction
-
-function! SetupEmbeddedRust()
-    " rust-analyzer needs a special LSP config for embedded targets
-    " Update the --target argument to match the architecture in .cargo/config
-    let g:ale_rust_analyzer_config = {
-        \ 'checkOnSave': {
-            \ 'allTargets': v:false,
-            \ 'extraArgs': ['--target', 'thumbv7em-none-eabihf']
-        \ }
-    \ }
 endfunction
 
 " Key mappings
