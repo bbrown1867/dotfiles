@@ -88,12 +88,11 @@ let mapleader = ' '
 
 nnoremap <leader>z :bp<Cr>
 nnoremap <leader>x :bn<Cr>
+nnoremap <leader>w <C-w><C-w>
 nnoremap <leader>p :GFiles<Cr>
 nnoremap <leader>f :Rg<Cr>
 nnoremap <leader>g :ALEGoToDefinition<Cr>
 nnoremap <leader>c :ALEFindReferences<Cr>
-nnoremap <leader>e :ALENextWrap<Cr>
-nnoremap <leader>w <C-w><C-w>
 
 " Config and key mappings for cscope
 
@@ -108,7 +107,7 @@ if has('cscope')
         cs add $CSCOPE_DB
     endif
 
-    " Go to definition under cursor (overidde ALEGoToDefinition)
+    " Go to definition under cursor (override ALEGoToDefinition)
     autocmd FileType c nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
     autocmd FileType cpp nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 
