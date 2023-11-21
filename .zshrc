@@ -41,6 +41,13 @@ source $HOME/.vim/plugged/fzf/shell/key-bindings.zsh
 # Custom aliases
 source $HOME/.bash_aliases
 
+# Ripgrep + Vim helper
+function rgv {
+    readonly pattern=$1
+    readonly dir=${2:-"."}
+    vim +/$pattern $(rg -l $pattern $dir)
+}
+
 # Machine specific config
 if [[ -f $HOME/.zshrc.local ]]; then
     source $HOME/.zshrc.local
