@@ -59,6 +59,8 @@ set backspace=indent,eol,start
 set splitright
 set splitbelow
 set mouse=nv
+set ignorecase
+set smartcase
 
 " Display
 
