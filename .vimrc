@@ -23,7 +23,7 @@ else
     set expandtab
 endif
 
-" Basic config
+" General
 
 set t_Co=256
 set nocompatible
