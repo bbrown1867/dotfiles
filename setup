@@ -1,6 +1,7 @@
 #! /bin/bash
 
-PACKAGES="cscope curl gnupg htop ripgrep tmux tree vim"
+DOTFILES=".bash_aliases .tmux.conf .vimrc .zshrc"
+PACKAGES="cscope curl gnupg ripgrep tmux tree vim"
 
 # Install packages
 if [[ $* == *--skip* ]]; then
@@ -17,8 +18,6 @@ else
         echo "Cannot install packages on this machine"
     fi
 fi
-
-DOTFILES=".bash_aliases .tmux.conf .vimrc .zshrc"
 
 # Add dotfiles
 for filename in $DOTFILES; do

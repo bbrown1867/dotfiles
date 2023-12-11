@@ -34,19 +34,12 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # Set default editor
 export EDITOR=vim
 
-# Setup fzf (installed with vim-plug)
+# Setup fzf
 export PATH="$HOME/.vim/plugged/fzf/bin:$PATH"
 source $HOME/.vim/plugged/fzf/shell/key-bindings.zsh
 
 # Custom aliases
 source $HOME/.bash_aliases
-
-# Ripgrep + Vim helper
-function rgv {
-    readonly pattern=$1
-    readonly dir=${2:-"."}
-    vim +/$pattern $(rg -l $pattern $dir)
-}
 
 # Machine specific config
 if [[ -f $HOME/.zshrc.local ]]; then
