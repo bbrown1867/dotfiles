@@ -3,6 +3,7 @@ syntax on
 " Plugins
 
 call plug#begin('~/.vim/plugged')
+Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -10,6 +11,24 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+
+let g:ale_completion_enabled = 1
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_linters = {
+    \ 'python': ['jedils', 'flake8', 'pycodestyle'],
+    \ 'rust': ['analyzer']
+    \ }
+let g:ale_python_pycodestyle_options = '--max-line-length 150'
+let g:ale_rust_analyzer_config = {
+    \ 'cargo': {
+        \ 'target': 'thumbv7em-none-eabihf'
+    \ },
+    \ 'check': {
+        \ 'allTargets': v:false
+    \ }
+\ }
 
 " Spacing
 
@@ -74,6 +93,8 @@ nnoremap <leader>x :bn<Cr>
 nnoremap <leader>w <C-w><C-w>
 nnoremap <leader>p :GFiles<Cr>
 nnoremap <leader>f :Rg<Cr>
+nnoremap <leader>g :ALEGoToDefinition<Cr>
+nnoremap <leader>c :ALEFindReferences<Cr>
 
 " Config and key mappings for cscope
 
@@ -88,11 +109,11 @@ if has('cscope')
         cs add $CSCOPE_DB
     endif
 
-    " Go to definition under cursor
+    " Go to definition under cursor (override ALEGoToDefinition)
     autocmd FileType c nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
     autocmd FileType cpp nnoremap <buffer> <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
 
-    " Find functions calling function under cursor
+    " Find functions calling function under cursor (override ALEFindReferences)
     autocmd FileType c nnoremap <buffer> <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
     autocmd FileType cpp nnoremap <buffer> <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 endif
