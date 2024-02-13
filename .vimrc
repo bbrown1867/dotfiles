@@ -20,6 +20,7 @@ let g:ale_linters = {
     \ 'python': ['jedils', 'flake8', 'pycodestyle'],
     \ 'rust': ['analyzer']
     \ }
+let g:ale_python_flake8_options = '--max-line-length 150'
 let g:ale_python_pycodestyle_options = '--max-line-length 150'
 let g:ale_rust_analyzer_config = {
     \ 'cargo': {
