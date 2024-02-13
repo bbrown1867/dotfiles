@@ -68,7 +68,10 @@ set smartcase
 set colorcolumn=81,101,121
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
-colorscheme PaperColor
+if filereadable($HOME.'/.vim/plugged/papercolor-theme/README.md')
+    colorscheme PaperColor
+endif
+
 let g:airline_theme='papercolor'
 let g:airline#extensions#tabline#enabled = 1
 
