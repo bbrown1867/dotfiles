@@ -16,9 +16,14 @@ let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
+let g:ale_fix_on_save = 1
 let g:ale_linters = {
     \ 'python': ['jedils', 'flake8', 'pycodestyle'],
     \ 'rust': ['analyzer']
+    \ }
+let g:ale_fixers = {
+    \ '*': ['trim_whitespace'],
+    \ 'rust': ['rustfmt']
     \ }
 let g:ale_python_flake8_options = '--max-line-length 150'
 let g:ale_python_pycodestyle_options = '--max-line-length 150'
