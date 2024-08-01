@@ -19,6 +19,7 @@ alias gl="git log"
 alias gd="git diff -b"
 alias gds="git diff -b --staged"
 alias branches="git branch -a | grep $USER"
+alias nuke="git clean -xdf"
 
 alias tree="tree --dirsfirst"
 alias tt="tree -L 2"
