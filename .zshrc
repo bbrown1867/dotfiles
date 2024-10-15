@@ -31,6 +31,9 @@ PROMPT+=" %# "
 export CLICOLOR=1
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
+# Vim key bindings
+bindkey -v
+
 # Set default editor
 export EDITOR=vim
 
