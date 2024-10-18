@@ -103,6 +103,7 @@ nnoremap <leader>x :bn<Cr>
 nnoremap <leader>w <C-w><C-w>
 nnoremap <leader>p :GFiles<Cr>
 nnoremap <leader>f :Rg<Cr>
+nnoremap <leader>F :Rg <C-R><C-W><Cr>
 nnoremap <leader>g :ALEGoToDefinition<Cr>
 nnoremap <leader>c :ALEFindReferences<Cr>
 
