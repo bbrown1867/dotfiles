@@ -3,5 +3,6 @@
 rm -f cscope.out
 find "$PWD" -type f -name "*.[chxsS]" -not -path "$PWD/build/*"                         >  cscope.files
 find "$PWD" -type l -name "*.[chxsS]" -not -path "$PWD/build/*" -exec readlink -f {} \; >> cscope.files
+sed -i '' 's|^|\"|; s|$|\"|' cscope.files
 cscope -b -i cscope.files
 rm cscope.files
