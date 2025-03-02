@@ -7,13 +7,11 @@ PACKAGES="cscope curl gnupg ripgrep tmux tree vim"
 if [[ $* == *--skip* ]]; then
     echo "Skipping package install"
 else
-    if [ -n "$(uname -a | grep -i ubuntu)" ]; then
+    if [ -n "$(uname -a | grep -i darwin)" ]; then
+        brew install $PACKAGES
+    elif [ -n "$(uname -a | grep -i linux)" ]; then
         sudo apt-get update
         sudo apt-get install $PACKAGES -y
-    elif [ -n "$(uname -a | grep -i darwin)" ]; then
-        brew install $PACKAGES
-    elif [ -n "$(uname -a | grep "GNU/Linux")" ]; then
-        sudo pacman -S $PACKAGES
     else
         echo "Cannot install packages on this machine"
     fi
