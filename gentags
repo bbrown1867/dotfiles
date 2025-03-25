@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 rm -f cscope.out
 find "$PWD" -type f -name "*.[chxsS]" -not -path "$PWD/build/*"                         >  cscope.files

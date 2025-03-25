@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 if [ -n "$(uname -a | grep -i darwin)" ]; then
     alias ls="LC_COLLATE=C ls"
