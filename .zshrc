@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Only allow unique path values
-typeset -U path
+typeset -U PATH
 
 # Automatically enter directories
 setopt auto_cd
