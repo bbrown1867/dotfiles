@@ -1,5 +1,35 @@
 syntax on
 
+set backspace=indent,eol,start
+set encoding=utf-8
+set hlsearch
+set ignorecase
+set mouse=nv
+set nocompatible
+set number
+set relativenumber
+set showmode
+set showmatch
+set splitright
+set splitbelow
+set smartcase
+set title
+set wrapscan
+
+" Spacing
+
+set smartindent
+if (&ft == 'Makefile')
+    set shiftwidth=8
+    set softtabstop=8
+    set tabstop=8
+else
+    set expandtab
+    set shiftwidth=4
+    set softtabstop=4
+    set tabstop=4
+endif
+
 " Plugins
 
 call plug#begin('~/.vim/plugged')
@@ -12,6 +42,41 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
+
+" Colors
+
+set background=dark
+set colorcolumn=81,101,121
+if filereadable($HOME.'/.vim/plugged/papercolor-theme/README.md')
+    colorscheme PaperColor
+endif
+
+" Remaps
+
+let mapleader = ' '
+
+nnoremap <leader>z :bp<Cr>
+nnoremap <leader>x :bn<Cr>
+nnoremap <leader>w <C-w><C-w>
+nnoremap <leader>p :GFiles<Cr>
+nnoremap <leader>f :Rg<Cr>
+nnoremap <leader>F :Rg <C-R><C-W><Cr>
+nnoremap <leader>g :ALEGoToDefinition<Cr>
+nnoremap <leader>c :ALEFindReferences<Cr>
+
+" Custom functions
+
+function! DisplayWhitespace()
+    set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:␣
+    set list
+endfunction
+
+" Config for Airline
+
+let g:airline_theme='papercolor'
+let g:airline#extensions#tabline#enabled = 1
+
+" Config for ALE
 
 let g:ale_completion_enabled = 1
 let g:ale_linters_explicit = 1
@@ -37,77 +102,7 @@ let g:ale_rust_analyzer_config = {
     \ }
 \ }
 
-" Spacing
-
-set autoindent
-if (&ft == 'Makefile')
-    set tabstop=8
-    set shiftwidth=8
-else
-    set tabstop=4
-    set shiftwidth=4
-    set expandtab
-endif
-
-" General
-
-set t_Co=256
-set nocompatible
-set wrapscan
-set hlsearch
-set gdefault
-set title
-set showmode
-set showmatch
-set number
-set relativenumber
-set encoding=utf-8
-set backspace=indent,eol,start
-set splitright
-set splitbelow
-set mouse=nv
-set ignorecase
-set smartcase
-
-" Display
-
-set colorcolumn=81,101,121
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-if filereadable($HOME.'/.vim/plugged/papercolor-theme/README.md')
-    colorscheme PaperColor
-endif
-
-let g:airline_theme='papercolor'
-let g:airline#extensions#tabline#enabled = 1
-
-if !has('macunix') || system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
-    set background=dark
-else
-    set background=light
-endif
-
-" Custom functions
-
-function! DisplayWhitespace()
-    set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:␣
-    set list
-endfunction
-
-" Key mappings
-
-let mapleader = ' '
-
-nnoremap <leader>z :bp<Cr>
-nnoremap <leader>x :bn<Cr>
-nnoremap <leader>w <C-w><C-w>
-nnoremap <leader>p :GFiles<Cr>
-nnoremap <leader>f :Rg<Cr>
-nnoremap <leader>F :Rg <C-R><C-W><Cr>
-nnoremap <leader>g :ALEGoToDefinition<Cr>
-nnoremap <leader>c :ALEFindReferences<Cr>
-
-" Config and key mappings for cscope
+" Config for Cscope
 
 if has('cscope')
     set cscopetag
