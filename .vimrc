@@ -13,9 +13,7 @@ set showmatch
 set splitright
 set splitbelow
 set smartcase
-set textwidth=80
 set title
-set wrap
 set wrapscan
 
 " Spacing
