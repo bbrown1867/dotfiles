@@ -13,7 +13,9 @@ set showmatch
 set splitright
 set splitbelow
 set smartcase
+set textwidth=80
 set title
+set wrap
 set wrapscan
 
 " Spacing
@@ -45,10 +47,16 @@ call plug#end()
 
 " Colors
 
-set background=dark
 set colorcolumn=81,101,121
+
 if filereadable($HOME.'/.vim/plugged/papercolor-theme/README.md')
     colorscheme PaperColor
+endif
+
+if !has('macunix') || system('defaults read -g AppleInterfaceStyle') =~ '^Dark'
+    set background=dark
+else
+    set background=light
 endif
 
 " Remaps
