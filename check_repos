@@ -14,7 +14,7 @@ from contextlib import contextmanager
 
 
 DEFAULT_LABEL = "bbrown"
-DEFAULT_BRANCH_NAMES = ["master", "main", "develop", "development"]
+DEFAULT_BRANCH_NAMES = ["master", "main", "develop", "development", "green"]
 
 
 def _pprint(text):
