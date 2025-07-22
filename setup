@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES=".bash_aliases .tmux.conf .vimrc .zshrc"
-PACKAGES="cscope curl gnupg ripgrep tmux tree vim"
+PACKAGES="cscope curl gnupg ripgrep neovim tmux tree vim"
 
 # Install packages
 if [[ $* == *--skip* ]]; then
@@ -29,4 +29,17 @@ curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim > /dev/null 2>&1
 vim +'PlugInstall --sync' +qa
 
-echo "Setup complete"
+# Setup Neovim
+SRC_DIR="$(pwd)/nvim"
+DST_DIR="$HOME/.config/nvim"
+SRC_DIR="${SRC_DIR%/}"
+DST_DIR="${DST_DIR%/}"
+find "$SRC_DIR" -type f | while read -r src_file; do
+    rel_path="${src_file#$SRC_DIR/}"
+    dst_file="$DST_DIR/$rel_path"
+    mkdir -p "$(dirname "$dst_file")"
+    ln -sf "$src_file" "$dst_file"
+    echo "Linked $rel_path → $dst_file"
+done
+
+echo "✅ Setup complete."
