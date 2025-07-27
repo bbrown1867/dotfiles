@@ -35,11 +35,10 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 bindkey -v
 
 # Set default editor
-export EDITOR=vim
+export EDITOR=nvim
 
 # Setup fzf
-export PATH="$HOME/.vim/plugged/fzf/bin:$PATH"
-source $HOME/.vim/plugged/fzf/shell/key-bindings.zsh
+source <(fzf --zsh)
 
 # Custom aliases
 source $HOME/.bash_aliases

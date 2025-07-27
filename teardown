@@ -5,9 +5,14 @@ DOTFILES=".bash_aliases .tmux.conf .vimrc .zshrc"
 # Remove dotfiles
 for filename in $DOTFILES; do
     rm -f $HOME/$filename
+    echo "Removing $filename"
 done
 
-# Remove vim-plug
-rm -rf $HOME/.vim
+# Remove Neovim
+echo "Removing Neovim installation"
+rm -rf $HOME/.cache/nvim
+rm -rf $HOME/.config/nvim/
+rm -rf $HOME/.local/share/nvim
+rm -rf $HOME/.local/state/nvim
 
-echo "Teardown complete"
+echo "✅ Teardown complete"
