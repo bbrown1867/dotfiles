@@ -12,7 +12,7 @@ return {
         function()
           require('harpoon'):list():add()
         end,
-        desc = '[H]arpoon current file',
+        desc = 'Harpoon current file',
       },
       {
         '<leader>a',
