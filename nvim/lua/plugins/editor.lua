@@ -2,6 +2,15 @@ return {
   -- Indentation style detection
   'NMAC427/guess-indent.nvim',
 
+  { -- Add, delete, and change surrounding pairs
+    'kylechui/nvim-surround',
+    version = '^3.0.0',
+    event = 'VeryLazy',
+    config = function()
+      require('nvim-surround').setup {}
+    end,
+  },
+
   -- Highlight todo, notes, and fixme in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -21,12 +30,6 @@ return {
   { -- Collection of various small independent plugins
     'echasnovski/mini.nvim',
     config = function()
-      -- Better around/inside text objects
-      require('mini.ai').setup { n_lines = 500 }
-
-      -- Add/delete/replace surroundings (brackets, quotes, etc)
-      require('mini.surround').setup()
-
       -- Simple and easy statusline
       local statusline = require 'mini.statusline'
       statusline.setup { use_icons = vim.g.have_nerd_font }
