@@ -140,12 +140,14 @@ return {
       }
 
       -- TODO: Can't seem to override clangd command when using Mason
-      require('lspconfig').clangd.setup {
+      vim.lsp.config.clangd = {
         cmd = {
           'clangd',
           '--header-insertion=never',
         },
       }
+
+      vim.lsp.start(vim.lsp.config.clangd)
     end,
   },
 }
