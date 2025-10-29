@@ -120,34 +120,40 @@ return {
             },
           },
         },
+        clangd = {
+          cmd = { 'clangd', '--header-insertion=never' },
+          root_dir = vim.fs.root(0, { 'compile_commands.json', '.git' }),
+        },
       }
 
-      -- Ensure the servers and tools above are installed (check manually with :Mason)
-      local ensure_installed = vim.tbl_keys(servers or {})
+      -- Make sure these are installed
+      local ensure_installed = vim.tbl_keys(servers)
       vim.list_extend(ensure_installed, { 'stylua' })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
+      -- Don’t let mason-lspconfig auto-launch anything
       require('mason-lspconfig').setup {
         ensure_installed = {},
         automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+      }
+
+      -- Attach your own handler (new-style)
+      for name, config in pairs(servers) do
+        -- Merge with your capabilities (optional)
+        config.capabilities = vim.tbl_deep_extend('force', {}, capabilities or {}, config.capabilities or {})
+
+        vim.lsp.config[name] = config
+
+        -- Start lazily when a relevant filetype opens
+        vim.api.nvim_create_autocmd('FileType', {
+          pattern = (name == 'clangd') and { 'c', 'cpp', 'objc', 'objcpp' } or name,
+          callback = function()
+            if not vim.lsp.get_active_clients({ name = name })[1] then
+              vim.lsp.start(vim.lsp.config[name])
+            end
           end,
-        },
-      }
-
-      -- TODO: Can't seem to override clangd command when using Mason
-      vim.lsp.config.clangd = {
-        cmd = {
-          'clangd',
-          '--header-insertion=never',
-        },
-      }
-
-      vim.lsp.start(vim.lsp.config.clangd)
+        })
+      end
     end,
   },
 }
