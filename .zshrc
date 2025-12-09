@@ -34,11 +34,18 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 # Vim key bindings
 bindkey -v
 
-# Set default editor
-export EDITOR=nvim
+# If installed, setup nvim as default editor
+if command -v nvim >/dev/null 2>&1; then
+    alias vim="nvim"
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
-# Setup fzf
-source <(fzf --zsh)
+# If installed, setup fzf
+if command -v fzf >/dev/null 2>&1; then
+    source <(fzf --zsh)
+fi
 
 # Custom aliases
 source $HOME/.bash_aliases

@@ -32,5 +32,3 @@ alias cr="check_repos"
 
 alias encrypt="gpg --no-symkey-cache --cipher-algo AES256 -c"
 alias decrypt="gpg --no-symkey-cache --cipher-algo AES256"
-
-alias vim="nvim"
