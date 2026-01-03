@@ -29,7 +29,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        python = { 'ruff_fix', 'isort', 'black' },
         rust = { 'rustfmt', lsp_format = 'fallback' },
         ['*'] = { 'codespell' },
         ['_'] = { 'trim_whitespace' },
