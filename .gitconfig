@@ -1,0 +1,9 @@
+[user]
+    name = Ben Brown
+    email = 5721984+bbrown1867@users.noreply.github.com
+[color "decorate"]
+    HEAD = cyan
+    branch = green
+    tag = blue bold
+[alias]
+    edit = !$EDITOR $(git status --short | grep -v '^??' | awk '{print $2}')

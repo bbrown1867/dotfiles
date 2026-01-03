@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES=".bash_aliases .tmux.conf .vimrc .zshrc"
+DOTFILES=".bash_aliases .gitconfig .tmux.conf .vimrc .zshrc"
 PACKAGES="cscope curl fzf gnupg ripgrep neovim tmux tree vim"
 
 # Install packages
