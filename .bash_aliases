@@ -28,7 +28,5 @@ alias g="grep -rn . -e"
 alias gw="grep -rnw . -e"
 alias rg="rg --colors 'path:fg:yellow'"
 
-alias cr="check_repos"
-
 alias encrypt="gpg --no-symkey-cache --cipher-algo AES256 -c"
 alias decrypt="gpg --no-symkey-cache --cipher-algo AES256"

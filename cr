@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 
-"""Print status information about Git repositories.
+"""Print info about Git repositories
 
 If the current directory is a Git repository, the status
 of it is printed. If not, all directories one-level down
 are checked and status information is printed for each.
 """
 
-import os
 import argparse
+import os
+import re
 import subprocess
 from contextlib import contextmanager
 
-
-DEFAULT_LABEL = "bbrown"
-DEFAULT_BRANCH_NAMES = ["master", "main", "develop", "development", "green"]
+_DEFAULT_LABEL = "bbrown"
+_DEFAULT_BRANCH_NAMES = ["master", "main", "develop", "development", "green"]
 
 
 def _pprint(text):
@@ -75,6 +75,13 @@ def _get_git_branch_info(label):
     return curr_branch, local_branches, labeled_branches_filtered
 
 
+def _get_committers(committer):
+    for line in set(_run_git_cmd(["log", "--format=%an <%ae>"])):
+        match = re.search(committer, line)
+        if match:
+            print(f"\t{line}")
+
+
 def _analyze_repo(label, verbose):
     changes = _get_git_status()
     ignores = _get_git_ignores()
@@ -88,14 +95,14 @@ def _analyze_repo(label, verbose):
             if verbose:
                 _pprint(output_lines)
 
-    if curr_branch not in DEFAULT_BRANCH_NAMES:
+    if curr_branch not in _DEFAULT_BRANCH_NAMES:
         if "HEAD detached at" in curr_branch:
             _pprint("In detached state.")
         else:
             _pprint("On non-default branch %s." % curr_branch)
 
     _status_checker(
-        "%d other local branches in repository." % len(local_branches),
+        "%d other local branches in repo." % len(local_branches),
         local_branches,
     )
 
@@ -104,9 +111,9 @@ def _analyze_repo(label, verbose):
         labeled_branches,
     )
 
-    _status_checker("Repository has working changes.", changes)
-    _status_checker("Repository has ignored files.", ignores)
-    _status_checker("Repository has stashed changes.", stashes)
+    _status_checker("Repo has working changes.", changes)
+    _status_checker("Repo has ignored files.", ignores)
+    _status_checker("Repo has stashed changes.", stashes)
 
 
 @contextmanager
@@ -127,20 +134,25 @@ def _is_git_repo(path):
     return os.path.isdir(path) and os.path.isdir(os.path.join(path, ".git"))
 
 
-def check_repos(label=DEFAULT_LABEL, target_repo=None, verbose=False):
-    """Print status information about Git repositories."""
+def check_repos(label, target_repo, committer, verbose):
     cwd = os.getcwd()
     if _is_git_repo(cwd):
         repo = os.path.split(cwd)[-1]
         with _process_repo(repo):
-            _analyze_repo(label, verbose)
+            if committer:
+                _get_committers(committer)
+            else:
+                _analyze_repo(label, verbose)
     else:
         for repo in sorted(os.listdir(cwd)):
             if _is_git_repo(repo):
                 if not target_repo or (target_repo and repo == target_repo):
                     with _process_repo(repo):
                         with _new_cwd(repo):
-                            _analyze_repo(label, verbose)
+                            if committer:
+                                _get_committers(committer)
+                            else:
+                                _analyze_repo(label, verbose)
 
 
 if __name__ == "__main__":
@@ -149,26 +161,34 @@ if __name__ == "__main__":
     parser.add_argument(
         "-l",
         "--label",
-        default=DEFAULT_LABEL,
+        default=_DEFAULT_LABEL,
         help="Label to use when searching for branches of interest.",
     )
 
     parser.add_argument(
         "-r",
-        "--repository",
-        help="Get status about a specific directory one-level down.",
+        "--repo",
+        default=None,
+        help="Get status about a specific repo one-level down.",
+    )
+
+    parser.add_argument(
+        "-c",
+        "--committer",
+        default=None,
+        help="Check if repo has commit authors matching the provided regex",
     )
 
     parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
-        help="Print verbose output for repository state.",
+        help="Print verbose output for repo state.",
     )
 
     args = parser.parse_args()
 
     try:
-        check_repos(args.label, args.repository, args.verbose)
+        check_repos(args.label, args.repo, args.committer, args.verbose)
     except KeyboardInterrupt:
         exit(0)
