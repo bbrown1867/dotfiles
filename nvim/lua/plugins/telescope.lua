@@ -39,4 +39,14 @@ return {
       end, { desc = 'Search in current buffer' })
     end,
   },
+
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+    config = function()
+      vim.keymap.set('n', '<leader>e', function()
+        require('telescope').extensions.file_browser.file_browser { path = '%:p:h', select_buffer = true }
+      end)
+    end,
+  },
 }
