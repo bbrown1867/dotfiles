@@ -121,7 +121,7 @@ return {
         },
         clangd = {
           cmd = { 'clangd', '--header-insertion=never' },
-          root_dir = vim.fs.root(0, { 'compile_commands.json', '.git' }),
+          root_markers = { 'compile_commands.json', '.git' },
         },
       }
 
@@ -130,28 +130,18 @@ return {
       vim.list_extend(ensure_installed, { 'flake8', 'stylua' })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      -- Don’t let mason-lspconfig auto-launch anything
+      -- Don’t let mason-lspconfig enable every installed server
       require('mason-lspconfig').setup {
         ensure_installed = {},
-        automatic_installation = false,
+        automatic_enable = false,
       }
 
-      -- Attach your own handler (new-style)
       for name, config in pairs(servers) do
-        -- Merge with your capabilities (optional)
+        -- Add blink.cmp completion capabilities
         config.capabilities = vim.tbl_deep_extend('force', {}, capabilities or {}, config.capabilities or {})
 
-        vim.lsp.config[name] = config
-
-        -- Start lazily when a relevant filetype opens
-        vim.api.nvim_create_autocmd('FileType', {
-          pattern = (name == 'clangd') and { 'c', 'cpp', 'objc', 'objcpp' } or name,
-          callback = function()
-            if not vim.lsp.get_active_clients({ name = name })[1] then
-              vim.lsp.start(vim.lsp.config[name])
-            end
-          end,
-        })
+        vim.lsp.config(name, config)
+        vim.lsp.enable(name)
       end
     end,
   },
