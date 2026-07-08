@@ -107,7 +107,6 @@ return {
 
       -- Enable and configure language servers
       local servers = {
-        flake8 = {},
         jedi_language_server = {},
         rust_analyzer = {},
         lua_ls = {
@@ -128,7 +127,7 @@ return {
 
       -- Make sure these are installed
       local ensure_installed = vim.tbl_keys(servers)
-      vim.list_extend(ensure_installed, { 'stylua' })
+      vim.list_extend(ensure_installed, { 'flake8', 'stylua' })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       -- Don’t let mason-lspconfig auto-launch anything
