@@ -44,15 +44,22 @@ return {
 
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    branch = 'master',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs',
-    opts = {
-      auto_install = true,
-      highlight = {
-        enable = true,
-      },
-      indent = { enable = true },
-    },
+    branch = 'main',
+    lazy = false,
+    config = function()
+      local treesitter = require 'nvim-treesitter'
+
+      treesitter.setup {}
+
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('treesitter-start', { clear = true }),
+        callback = function(args)
+          local language = vim.treesitter.language.get_lang(args.match) or args.match
+          if pcall(vim.treesitter.start, args.buf, language) and vim.treesitter.query.get(language, 'indents') then
+            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+        end,
+      })
+    end,
   },
 }
