@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+DOTFILES=".bash_aliases .gitconfig .tmux.conf .vimrc .zshrc.local"
+SCRIPTS="cr df-clean df-install df-sync"
+
+# Remove dotfiles
+for filename in $DOTFILES; do
+    rm -f $HOME/$filename
+    echo "Removing $filename"
+done
+
+# Remove scripts
+for filename in $SCRIPTS; do
+    rm -f $HOME/.local/bin/$filename
+    echo "Removing $filename"
+done
+
+# Remove neovim
+echo "Removing neovim config"
+rm -rf $HOME/.config/nvim

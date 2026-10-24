@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
+
+if [[ ! -e "$ROOT/.git" ]]; then
+    echo "Error: Only run this command from the dotfiles repository." >&2
+    exit 1
+fi
+
+if [[ "$ROOT" == "$(cd -- "$HOME" && pwd -P)" ]]; then
+    echo "Error: Source and destination directory are the same." >&2
+    exit 1
+fi
+
+rsync -av --exclude="/.git/" "$ROOT/" "$HOME/"

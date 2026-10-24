@@ -49,8 +49,3 @@ fi
 
 # Custom aliases
 source $HOME/.bash_aliases
-
-# Machine specific config
-if [[ -f $HOME/.zshrc.local ]]; then
-    source $HOME/.zshrc.local
-fi
